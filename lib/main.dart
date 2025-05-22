@@ -1,3 +1,5 @@
+import 'package:Pizza_App/pages/home.dart';
+import 'package:Pizza_App/pages/onboarding.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,11 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Pizaa App',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: Text("Hello world!", style: TextStyle(fontSize: 40)),
-        ),
-      ),
+      home:Home()
+      //  Onboarding()
     );
   }
 }
