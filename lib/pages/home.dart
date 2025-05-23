@@ -1,3 +1,5 @@
+import 'package:Pizza_App/model/category_model.dart';
+import 'package:Pizza_App/service/category_data.dart';
 import 'package:Pizza_App/service/widget_support.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +11,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List<CategoryModel> categories = [];
+  String track = "0";
+
+  @override
+  void initState() {
+    categories = getCategories();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,10 +49,8 @@ class _HomeState extends State<Home> {
                   ],
                 ),
 
-                
                 const Spacer(),
 
-               
                 Image.asset(
                   'assets/images/boy.jpg',
                   height: 60,
@@ -50,7 +59,7 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
-            SizedBox(height: 30,),
+            SizedBox(height: 30),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -58,12 +67,11 @@ class _HomeState extends State<Home> {
                   child: Container(
                     padding: EdgeInsets.only(left: 10),
                     margin: EdgeInsets.only(right: 20),
-                    decoration: BoxDecoration(
-                      color: Color(0xFFececf8),
-                    ),
+                    decoration: BoxDecoration(color: Color(0xFFececf8)),
                     child: TextField(
                       decoration: InputDecoration(
-                        border: InputBorder.none,hintText: 'Search your favorite food...'
+                        border: InputBorder.none,
+                        hintText: 'Search your favorite food...',
                       ),
                     ),
                   ),
@@ -71,13 +79,88 @@ class _HomeState extends State<Home> {
                 Container(
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(color: Color(0xffef2b39)),
-                  child: Icon(Icons.search,color: Colors.white,size: 30,),
-                )
+                  child: Icon(Icons.search, color: Colors.white, size: 30),
+                ),
               ],
-            )
+            ),
+            SizedBox(height: 20),
+            Container(
+              height: 70,
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: categories.length,
+                itemBuilder: (context, index) {
+                  return CategoryTile(
+                    categories[index].name!,
+                    categories[index].image!,
+                    index.toString(),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget CategoryTile(String name, String image, String categoryindex) {
+    return GestureDetector(
+      onTap: () {
+        track = categoryindex.toString();
+
+        setState(() {});
+      },
+      child:
+          track == categoryindex
+              ? Container(
+                margin: EdgeInsets.only(right: 20.0, bottom: 10.0),
+                child: Material(
+                  elevation: 3.0,
+                  borderRadius: BorderRadius.circular(30),
+                  child: Container(
+                    padding: EdgeInsets.only(left: 20, right: 20),
+
+                    decoration: BoxDecoration(
+                      color: Color(0xffef2b39),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          image,
+                          height: 40,
+                          width: 40,
+                          fit: BoxFit.cover,
+                        ),
+                        SizedBox(width: 10),
+                        Text(name, style: AppWidget.whiteTextFeildStyle()),
+                      ],
+                    ),
+                  ),
+                ),
+              )
+              : Container(
+                padding: EdgeInsets.only(left: 20, right: 20),
+                margin: EdgeInsets.only(right: 20, bottom: 10),
+                decoration: BoxDecoration(
+                  color: Color(0xFFececf8),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      image,
+                      height: 40,
+                      width: 40,
+                      fit: BoxFit.cover,
+                    ),
+                    SizedBox(width: 10),
+                    Text(name, style: AppWidget.SimpleTextFeildStyle()),
+                  ],
+                ),
+              ),
     );
   }
 }
