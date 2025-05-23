@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Pizaa App',
       debugShowCheckedModeBanner: false,
-      home:Home()
+      home: Home(),
       //  Onboarding()
     );
   }

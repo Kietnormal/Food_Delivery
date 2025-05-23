@@ -1,5 +1,9 @@
+import 'package:Pizza_App/model/burger_model.dart';
 import 'package:Pizza_App/model/category_model.dart';
+import 'package:Pizza_App/model/pizza_model.dart';
+import 'package:Pizza_App/service/burger_data.dart';
 import 'package:Pizza_App/service/category_data.dart';
+import 'package:Pizza_App/service/pizza_data.dart';
 import 'package:Pizza_App/service/widget_support.dart';
 import 'package:flutter/material.dart';
 
@@ -12,11 +16,15 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<CategoryModel> categories = [];
+  List<PizzaModel> pizza = [];
+  List<BurgerModel> burger = [];
   String track = "0";
 
   @override
   void initState() {
     categories = getCategories();
+    pizza = getPizza();
+    burger = getBurger();
     super.initState();
   }
 
@@ -24,14 +32,13 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
+        padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Logo + Text bên trái
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -48,9 +55,7 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-
                 const Spacer(),
-
                 Image.asset(
                   'assets/images/boy.jpg',
                   height: 60,
@@ -59,7 +64,7 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 15),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -83,7 +88,7 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 5),
             Container(
               height: 70,
               child: ListView.builder(
@@ -99,8 +104,94 @@ class _HomeState extends State<Home> {
                 },
               ),
             ),
+            SizedBox(height: 10),
+            track == "0"
+                ? Expanded(
+                  child: GridView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.7,
+                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 10,
+                    ),
+                    itemCount: pizza.length,
+                    itemBuilder: (context, index) {
+                      return FoodTile(
+                        pizza[index].name!,
+                        pizza[index].image!,
+                        pizza[index].price!,
+                      );
+                    },
+                  ),
+                )
+                : track == "1"
+                ? Expanded(
+                  child: GridView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.7,
+                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 10,
+                    ),
+                    itemCount: burger.length,
+                    itemBuilder: (context, index) {
+                      return FoodTile(
+                        burger[index].name!,
+                        burger[index].image!,
+                        burger[index].price!,
+                      );
+                    },
+                  ),
+                )
+                : Container(),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget FoodTile(String name, String image, String price) {
+    return Container(
+      padding: EdgeInsets.only(left: 10, top: 10),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black38),
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Image.asset(
+              image,
+              height: 120,
+              width: 120,
+              fit: BoxFit.contain,
+            ),
+          ),
+          Text(name, style: AppWidget.boldTextFeildStyle()),
+          Text("\$" + price, style: AppWidget.priceTextFeildStyle()),
+          SizedBox(height: 10),
+          Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                height: 30,
+                width: 50,
+                decoration: BoxDecoration(
+                  color: Color(0xffef2b39),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+                  ),
+                ),
+                child: Icon(Icons.arrow_forward, color: Colors.white, size: 20),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -109,7 +200,6 @@ class _HomeState extends State<Home> {
     return GestureDetector(
       onTap: () {
         track = categoryindex.toString();
-
         setState(() {});
       },
       child:
@@ -121,7 +211,6 @@ class _HomeState extends State<Home> {
                   borderRadius: BorderRadius.circular(30),
                   child: Container(
                     padding: EdgeInsets.only(left: 20, right: 20),
-
                     decoration: BoxDecoration(
                       color: Color(0xffef2b39),
                       borderRadius: BorderRadius.circular(30),

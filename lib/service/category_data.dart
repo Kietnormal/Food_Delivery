@@ -5,22 +5,22 @@ List<CategoryModel> getCategories() {
   CategoryModel categoryModel = new CategoryModel();
 
   categoryModel.name = "Pizza";
-  categoryModel.image = "images/pizza.png";
+  categoryModel.image = "assets/images/pizza.png";
   category.add(categoryModel);
   categoryModel = new CategoryModel();
 
   categoryModel.name = "Burger";
-  categoryModel.image = "images/burger.png";
+  categoryModel.image = "assets/images/burger.png";
   category.add(categoryModel);
   categoryModel = new CategoryModel();
 
   categoryModel.name = "Chinese";
-  categoryModel.image = "images/Chinese.png";
+  categoryModel.image = "assets/images/chinese.png";
   category.add(categoryModel);
   categoryModel = new CategoryModel();
 
   categoryModel.name = "Mexican";
-  categoryModel.image = "images/tacos.png";
+  categoryModel.image = "assets/images/tacos.png";
   category.add(categoryModel);
   categoryModel = new CategoryModel();
 
