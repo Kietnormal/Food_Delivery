@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -124,7 +125,13 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  // Đây là nút login/register – bạn có thể xử lý logic sau này
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (_) => HomeScreen()),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF5DADE2),
                   foregroundColor: Colors.white,
@@ -145,14 +152,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
-            )
+            ),
+             SizedBox(height: 16),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTextField(String label, TextEditingController controller, [TextInputType keyboardType = TextInputType.text]) {
+  Widget _buildTextField(String label, TextEditingController controller,
+      [TextInputType keyboardType = TextInputType.text]) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -168,7 +177,8 @@ class _LoginScreenState extends State<LoginScreen> {
             keyboardType: keyboardType,
             decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              contentPadding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               hintText: 'Nhập $label',
               hintStyle: const TextStyle(color: Colors.grey),
             ),
@@ -194,11 +204,14 @@ class _LoginScreenState extends State<LoginScreen> {
             obscureText: _obscureText,
             decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              contentPadding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               hintText: 'Nhập $label',
               hintStyle: const TextStyle(color: Colors.grey),
               suffixIcon: IconButton(
-                icon: Icon(_obscureText ? Icons.visibility_off : Icons.visibility),
+                icon: Icon(_obscureText
+                    ? Icons.visibility_off
+                    : Icons.visibility),
                 onPressed: () {
                   setState(() => _obscureText = !_obscureText);
                 },
@@ -225,7 +238,9 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(child: Text(value, style: const TextStyle(color: Colors.black))),
+              Expanded(
+                child: Text(value, style: const TextStyle(color: Colors.black)),
+              ),
               if (isLoading)
                 const SizedBox(
                   width: 16,
