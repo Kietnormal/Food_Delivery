@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../models/user_model.dart' as AppUser;
+import 'mail_screen.dart';
+import 'setting_screen.dart';
+import 'login_screen.dart'; // Import login screen for logout
 
 
 
@@ -97,6 +100,10 @@ class ProfileScreen extends StatelessWidget {
                 icon: Icons.mail_outline,
                 title: 'Hộp thư',
                 onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MailboxScreen()),
+                  );
 
                 },
               ),
@@ -105,6 +112,10 @@ class ProfileScreen extends StatelessWidget {
                 icon: Icons.settings_outlined,
                 title: 'Cài đặt',
                 onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SettingsScreen()),
+                  );
 
                 },
               ),
