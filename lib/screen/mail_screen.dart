@@ -45,18 +45,7 @@ class MailboxScreen extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-
             Spacer(),
-
-            Container(
-              height: 4,
-              width: 60,
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-            SizedBox(height: 20),
           ],
         ),
       ),

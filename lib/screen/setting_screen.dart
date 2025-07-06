@@ -50,20 +50,7 @@ class SettingsScreen extends StatelessWidget {
                         color: Colors.grey[600],
                       ),
                     ),
-
                     Spacer(),
-
-                    Center(
-                      child: Container(
-                        height: 4,
-                        width: 60,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(2),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 20),
                   ],
                 ),
               ),

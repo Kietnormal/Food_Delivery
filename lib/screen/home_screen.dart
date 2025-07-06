@@ -179,12 +179,12 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Spacer(),
             GestureDetector(
-              // onTap: () {
-              //   Navigator.push(
-              //     context,
-              //     MaterialPageRoute(builder: (context) => ProfileScreen()),
-              //   );
-              // },
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfileScreen()),
+                );
+              },
               child: CircleAvatar(
                 radius: 16,
                 backgroundColor: Colors.grey[300],

@@ -265,7 +265,44 @@ class AuthService {
     return null;
   }
 
-// Method để cập nhật thông tin user (không chỉ địa chỉ)
+  Future<bool> updateUserAvatar({
+    required String avatarUrl,
+  }) async {
+    if (_currentUser == null) {
+      throw Exception('Người dùng chưa đăng nhập');
+    }
+
+    try {
+      log.log('Updating avatar for user: ${_currentUser!.id}', name: _tag);
+
+      // Tạo data cập nhật
+      Map<String, dynamic> updateData = {
+        'avatar': avatarUrl,
+        'updatedAt': DateTime.now().toIso8601String(),
+      };
+
+      // Cập nhật Firebase
+      await _database.child('users').child(_currentUser!.id).update(updateData);
+
+      // Cập nhật current user
+      _currentUser = _currentUser!.copyWith(
+        avatar: avatarUrl,
+        updatedAt: DateTime.now().toIso8601String(),
+      );
+
+      await _saveUserSession(_currentUser!);
+
+      log.log('Avatar updated successfully', name: _tag);
+      log.log('New avatar URL: $avatarUrl', name: _tag);
+
+      return true;
+    } catch (e) {
+      log.log('Update avatar error: $e', name: _tag, error: e, level: 1000);
+      throw e;
+    }
+  }
+
+// Method để cập nhật thông tin user (đã được cập nhật để hỗ trợ avatar)
   Future<bool> updateUserData(AppUser.User updatedUser) async {
     if (_currentUser == null) {
       throw Exception('Người dùng chưa đăng nhập');
@@ -279,10 +316,12 @@ class AuthService {
         provinceId: updatedUser.provinceId ?? _currentUser!.provinceId,
         districtId: updatedUser.districtId ?? _currentUser!.districtId,
         wardCode: updatedUser.wardCode ?? _currentUser!.wardCode,
+        // Giữ lại password cũ nếu không thay đổi
+        password: updatedUser.password.isEmpty ? _currentUser!.password : updatedUser.password,
         updatedAt: DateTime.now().toIso8601String(),
       );
 
-      // Cập nhật Firebase
+      // Cập nhật Firebase với đầy đủ thông tin
       await _database.child('users').child(userToUpdate.id).update(userToUpdate.toJson());
 
       // Cập nhật current user
@@ -290,6 +329,8 @@ class AuthService {
       await _saveUserSession(_currentUser!);
 
       log.log('User data updated successfully', name: _tag);
+      log.log('Updated avatar: ${userToUpdate.avatar}', name: _tag);
+
       return true;
     } catch (e) {
       log.log('Update user data error: $e', name: _tag, error: e, level: 1000);
