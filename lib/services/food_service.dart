@@ -3,7 +3,11 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:developer' as log;
+<<<<<<< HEAD
 // import '../models/category_model.dart';
+=======
+import '../models/category_model.dart';
+>>>>>>> Tan_Binh
 
 class FoodService {
   // Singleton pattern

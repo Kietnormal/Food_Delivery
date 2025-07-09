@@ -129,7 +129,11 @@ class OnboardingScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 40),
                     Text(
+<<<<<<< HEAD
                       'The Food\nDelivery',
+=======
+                      'The Food store',
+>>>>>>> Tan_Binh
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 24,
@@ -174,6 +178,7 @@ class OnboardingScreen extends StatelessWidget {
                 ),
               ),
             ),
+<<<<<<< HEAD
             Container(
               height: 4,
               width: 60,
@@ -183,6 +188,9 @@ class OnboardingScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
+=======
+
+>>>>>>> Tan_Binh
           ],
         ),
       ),

@@ -5,7 +5,11 @@
 *.swp
 .DS_Store
 .atom/
+<<<<<<< HEAD
 # .build/
+=======
+.build/
+>>>>>>> Tan_Binh
 .buildlog/
 .history
 .svn/
