@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '../services/admin_service.dart';
 import '../models/admin_model.dart';
 import 'login_screen.dart';
-
+import 'admin_order_screen.dart';
+import 'admin_food_screen.dart';
+import 'admin_analytics_screen.dart';
 
 class AdminDashboardScreen extends StatefulWidget {
   @override
@@ -80,9 +82,30 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
   }
 
   // Navigate to different screens
+  void _navigateToOrderManagement() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AdminOrderManagementScreen()),
+    );
+  }
 
+  void _navigateToFoodManagement() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AdminFoodManagementScreen()),
+    );
+  }
 
+  void _navigateToAnalytics() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AdminAnalyticsScreen()),
+    );
+  }
 
+  void _navigateToSettings() {
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -204,7 +227,40 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
             ),
             SizedBox(height: 16),
             // Grid of management options
-
+            GridView.count(
+              crossAxisCount: 2,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16,
+              childAspectRatio: 1.1,
+              children: [
+                _buildManagementCard(
+                  title: 'Quản lý đơn hàng',
+                  icon: Icons.receipt_long,
+                  color: Colors.orange,
+                  onTap: _navigateToOrderManagement,
+                ),
+                _buildManagementCard(
+                  title: 'Quản lý món ăn',
+                  icon: Icons.restaurant_menu,
+                  color: Colors.green,
+                  onTap: _navigateToFoodManagement,
+                ),
+                _buildManagementCard(
+                  title: 'Thống kê doanh thu',
+                  icon: Icons.trending_up,
+                  color: Colors.blue,
+                  onTap: _navigateToAnalytics,
+                ),
+                _buildManagementCard(
+                  title: 'Cài đặt',
+                  icon: Icons.settings,
+                  color: Colors.grey,
+                  onTap: _navigateToSettings,
+                ),
+              ],
+            ),
           ],
         ),
       ),
